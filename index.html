@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parkoló Detektálás - Főoldal</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a class="nav-brand" href="index.html">🅿 PARKING</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Főoldal</a>
+    <a class="nav-link" href="milestones.html">Mérföldkövek</a>
+  </div>
+  <div class="nav-status">
+    <span class="nav-dot"></span>
+    <span id="nav-score">- / 30 pt</span>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="fade-in" style="border-left:4px solid var(--accent); padding-left:20px; margin-bottom:40px;">
+    <div class="page-label">// Projektfeladat · 2025-2026</div>
+    <h1 class="page-title">Parkoló<br><span>Detektálás</span></h1>
+    <p class="page-sub" style="margin-top:10px; max-width:560px;">
+      Kép- és/vagy videófelvételen detektálni kell a foglalt és szabad parkolókat —
+      változatos megvilágítási és látási viszonyok mellett.
+    </p>
+  </div>
+
+  <!-- Feladatkiírás -->
+  <div class="card fade-in-2" style="margin-bottom:12px;">
+    <div class="section-label" style="margin-top:0;">// Feladatkiírás</div>
+    <p style="line-height:1.85; color:var(--text); font-size:.95rem; margin-bottom:20px;">
+      Kép- és/vagy videófelvételen detektálni kell a <strong>foglalt és szabad parkolókat</strong>.
+      Ügyelni kell arra, hogy az algoritmus változatos képeken, különböző nézőpontokból,
+      különböző megvilágítási és látási viszonyok mellett is a lehető legjobban érzékelje,
+      hogy a parkoló foglalt, vagy szabad.
+    </p>
+
+    <div style="height:1px; background:var(--border); margin-bottom:20px;"></div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:32px;">
+      <div>
+        <div style="font-family:'Space Mono',monospace; font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px;">Csapat</div>
+        <div style="font-weight:700; margin-bottom:4px;">👤 Hrotkó Máté</div>
+        <div style="font-weight:700;">👤 Litavecz Máté</div>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace; font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px;">Max pont</div>
+        <div style="font-family:'Space Mono',monospace; font-size:1.6rem; font-weight:700; color:var(--accent); line-height:1;">30 <span style="font-size:.8rem; color:var(--muted); font-weight:400;">pont</span></div>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace; font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px;">Mérföldkövek</div>
+        <div style="font-family:'Space Mono',monospace; font-size:1.6rem; font-weight:700; color:var(--accent2); line-height:1;">3 <span style="font-size:.8rem; color:var(--muted); font-weight:400;">db</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aktuális mérföldkő -->
+  <div id="current-card" class="card fade-in-3" style="margin-bottom:28px; border-color:var(--accent); background:rgba(240,192,64,.03);">
+    <div class="section-label" style="margin-top:0; color:var(--accent);">// Aktuális mérföldkő</div>
+    <div id="current-content" style="color:var(--muted); font-family:'Space Mono',monospace; font-size:.85rem;">Betöltés...</div>
+  </div>
+
+  <!-- Pontok összesítő -->
+  <div class="grid-4 fade-in-4" style="margin-bottom:28px;">
+    <div class="card" style="text-align:center;">
+      <div style="font-family:'Space Mono',monospace; font-size:.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">1. Mérföldkő</div>
+      <div style="font-family:'Space Mono',monospace; font-size:1.9rem; font-weight:700; color:var(--m1); line-height:1;"><span id="s1">-</span><span style="font-size:.82rem; color:var(--muted); font-weight:400;">/5</span></div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-family:'Space Mono',monospace; font-size:.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">2. Mérföldkő</div>
+      <div style="font-family:'Space Mono',monospace; font-size:1.9rem; font-weight:700; color:var(--m2); line-height:1;"><span id="s2">-</span><span style="font-size:.82rem; color:var(--muted); font-weight:400;">/10</span></div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-family:'Space Mono',monospace; font-size:.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">3. Mérföldkő</div>
+      <div style="font-family:'Space Mono',monospace; font-size:1.9rem; font-weight:700; color:var(--m3); line-height:1;"><span id="s3">-</span><span style="font-size:.82rem; color:var(--muted); font-weight:400;">/15</span></div>
+    </div>
+    <div class="card" style="text-align:center; border-color:var(--accent); background:rgba(240,192,64,.04);">
+      <div style="font-family:'Space Mono',monospace; font-size:.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">Összesen</div>
+      <div style="font-family:'Space Mono',monospace; font-size:1.9rem; font-weight:700; color:var(--accent); line-height:1;"><span id="st">-</span><span style="font-size:.82rem; color:var(--muted); font-weight:400;">/30</span></div>
+    </div>
+  </div>
+
+  <!-- Mérföldkövek áttekintés -->
+  <div class="section-label">// Mérföldkövek áttekintése</div>
+  <div id="overview"></div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <a href="milestones.html" style="
+      display:inline-block;
+      font-family:'Space Mono',monospace;
+      font-size:.8rem;
+      font-weight:700;
+      padding:10px 24px;
+      border-radius:10px;
+      background:var(--accent);
+      color:#0d0f14;
+      text-decoration:none;
+      transition:background .2s;
+    ">Részletek megtekintése →</a>
+  </div>
+
+  <div class="hint">// data.json · github pages · privát repó</div>
+</div>
+
+<script src="js/shared.js"></script>
+<script>
+const META = [
+  { id:'m1', label:'1. Mérföldkő', title:'Tervezés & Dokumentáció',    max:5,  color:'var(--m1)', pill:'m1-pill', deadline:'2026-03-01', deadlineLabel:'2026. márc. 1.' },
+  { id:'m2', label:'2. Mérföldkő', title:'Algoritmus Implementálása',   max:10, color:'var(--m2)', pill:'m2-pill', deadline:'2026-04-12', deadlineLabel:'2026. ápr. 12.' },
+  { id:'m3', label:'3. Mérföldkő', title:'Bemutató & Védés',            max:15, color:'var(--m3)', pill:'m3-pill', deadline:'2026-05-17', deadlineLabel:'2026. máj. 17.' },
+];
+
+function daysLeft(dateStr) {
+  const diff = Math.ceil((new Date(dateStr) - new Date()) / 86400000);
+  if (diff < 0)  return 'Határidő lejárt';
+  if (diff === 0) return 'Ma a határidő!';
+  return `${diff} nap van hátra`;
+}
+
+function currentIdx() {
+  const now = new Date();
+  for (let i = 0; i < META.length; i++) {
+    if (now <= new Date(META[i].deadline)) return i;
+  }
+  return META.length - 1;
+}
+
+function renderCurrent(data) {
+  const m = META[currentIdx()];
+  const pts = data.milestones[m.id].points;
+  const pct = Math.round(pts / m.max * 100);
+  document.getElementById('current-content').innerHTML = `
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
+      <span class="m-pill ${m.pill}">${m.label}</span>
+      <span style="font-size:1.05rem; font-weight:800; font-family:'Syne',sans-serif;">${m.title}</span>
+      <span style="font-family:'Space Mono',monospace; font-size:.72rem; color:var(--muted); margin-left:auto;">📅 ${m.deadlineLabel}</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:8px;">
+      <div style="font-family:'Space Mono',monospace; font-size:2.2rem; font-weight:700; color:${m.color}; line-height:1;">${pts}<span style="font-size:.85rem; color:var(--muted); font-weight:400;">/${m.max}</span></div>
+      <div style="flex:1;">
+        <div class="bar-bg"><div class="bar-fill" style="width:${pct}%; background:${m.color};"></div></div>
+        <div style="font-family:'Space Mono',monospace; font-size:.7rem; color:var(--muted); margin-top:5px;">${daysLeft(m.deadline)}</div>
+      </div>
+    </div>
+    <a href="milestones.html" style="font-family:'Space Mono',monospace; font-size:.78rem; color:${m.color}; text-decoration:none;">Részletek →</a>
+  `;
+}
+
+function renderOverview(data) {
+  document.getElementById('overview').innerHTML = META.map(m => {
+    const pts = data.milestones[m.id].points;
+    const pct = Math.round(pts / m.max * 100);
+    return `
+    <div class="card" style="margin-bottom:8px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:16px 20px;">
+      <span class="m-pill ${m.pill}">${m.label}</span>
+      <span style="font-weight:700; flex:1; min-width:140px;">${m.title}</span>
+      <span style="font-family:'Space Mono',monospace; font-size:.72rem; color:var(--muted);">📅 ${m.deadlineLabel}</span>
+      <div style="display:flex; align-items:center; gap:10px; min-width:180px;">
+        <div class="bar-bg" style="flex:1;"><div class="bar-fill" style="width:${pct}%; background:${m.color};"></div></div>
+        <span style="font-family:'Space Mono',monospace; font-size:.8rem; color:${m.color}; white-space:nowrap;">${pts}/${m.max} pt</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateScores(data) {
+  let total = 0;
+  META.forEach((m, i) => {
+    const pts = data.milestones[m.id].points;
+    document.getElementById(['s1','s2','s3'][i]).textContent = pts;
+    total += pts;
+  });
+  document.getElementById('st').textContent = total;
+  document.getElementById('nav-score').textContent = `${total}/30 pt`;
+}
+
+async function init() {
+  setActiveNav();
+  try {
+    const data = await loadData();
+    renderCurrent(data);
+    renderOverview(data);
+    updateScores(data);
+  } catch(e) {
+    document.getElementById('current-content').textContent = 'Nem sikerült betölteni a data.json-t.';
+  }
+}
+
+init();
+</script>
+</body>
+</html>

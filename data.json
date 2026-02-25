@@ -1,0 +1,25 @@
+{
+    "milestones": {
+        "m1": {
+            "points": 0
+        },
+        "m2": {
+            "points": 0
+        },
+        "m3": {
+            "points": 0
+        }
+    },
+    "team": {
+        "Hrotkó Máté": {
+            "m1": "Weboldal elkészítése",
+            "m2": "",
+            "m3": ""
+        },
+        "Litavecz Máté": {
+            "m1": "Költségbecslés, algoritmus terv vázlat",
+            "m2": "",
+            "m3": ""
+        }
+    }
+}
