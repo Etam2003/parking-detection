@@ -96,14 +96,6 @@ git push
 6. ~30 másodperc múlva élő a GitHub Pages-en
 ```
 
-### Hasznos git parancsok
-```bash
-git status          # mi változott
-git diff            # pontosan mi változott
-git log --oneline   # korábbi commitok
-```
-
----
 
 ## 5. Mérföldkő tartalom frissítése
 

@@ -21,25 +21,26 @@ $color-m2: #4af0c0;
 $color-m3: #f07040;
 
 // --- Betűméretek ---
-$fs-body: 20px;
-$fs-h1: clamp(2.5rem, 7vw, 4rem);
-$fs-nav: 1.17em;
-$fs-label: 1.08em;
-$fs-content: 1.23em;
-$fs-rem-xs: 0.93rem;
-$fs-rem-sm: 0.975rem;
-$fs-rem-md: 1.05rem;
-$fs-rem-stat: 1.02rem;
-$fs-rem-btn: 1.125rem;
-$fs-rem-sub: 1.17rem;
-$fs-rem-list: 1.2rem;
-$fs-rem-ditem: 1.215rem;
-$fs-rem-box: 1.26rem;
-$fs-rem-body: 1.29rem;
-$fs-rem-title: 1.38rem;
-$fs-rem-xl: 2.25rem;
-$fs-rem-xxl: 2.7rem;
-$radius-main: 18px;
+// Csökkentett base font-size a jobb helykihasználáshoz
+$fs-body: 16px;
+$fs-h1: clamp(2rem, 5vw, 3.2rem);
+$fs-nav: 0.9rem;
+$fs-label: 0.8rem;
+$fs-content: 0.95rem;
+$fs-rem-xs: 0.75rem;
+$fs-rem-sm: 0.8rem;
+$fs-rem-md: 0.85rem;
+$fs-rem-stat: 0.82rem;
+$fs-rem-btn: 0.875rem;
+$fs-rem-sub: 0.88rem;
+$fs-rem-list: 0.85rem;
+$fs-rem-ditem: 0.88rem;
+$fs-rem-box: 0.9rem;
+$fs-rem-body: 0.92rem;
+$fs-rem-title: 1rem;
+$fs-rem-xl: 1.6rem;
+$fs-rem-xxl: 2rem;
+$radius-main: 14px;
 $border-width: 1px;
 
 // CSS változók szinkronizálása a :root-tal
@@ -83,7 +84,7 @@ body {
     content: "";
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
     opacity: 0.35;
@@ -98,14 +99,14 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(13, 15, 20, 0.92);
+  background: rgba(13, 15, 20, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  padding: 0 32px;
+  padding: 0 40px;
   display: flex;
   align-items: center;
-  gap: 32px;
-  height: 56px;
+  gap: 24px;
+  height: 48px;
 
   .nav-brand {
     font-family: "Space Mono", monospace;
@@ -113,13 +114,13 @@ body {
     font-weight: 700;
     color: var(--accent);
     text-decoration: none;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     white-space: nowrap;
   }
 
   .nav-links {
     display: flex;
-    gap: 4px;
+    gap: 2px;
     flex: 1;
 
     .nav-link {
@@ -127,19 +128,22 @@ body {
       font-size: $fs-nav;
       color: var(--muted);
       text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 8px;
+      padding: 5px 12px;
+      border-radius: 6px;
       transition: color 0.2s, background 0.2s;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
 
       &:hover {
         color: var(--text);
         background: var(--surface);
       }
 
+      // Aktív állapot — jól látható sárga border-bottom + szín
       &.active {
         color: var(--accent);
         background: rgba(240, 192, 64, 0.1);
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 3px; // kompenzál a border miatt
       }
     }
   }
@@ -152,8 +156,8 @@ body {
 
     .nav-dot {
       display: inline-block;
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: var(--accent2);
       margin-right: 6px;
@@ -179,11 +183,15 @@ body {
 // ==========================================
 
 .page {
-  max-width: 920px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 48px 24px 100px;
+  padding: 36px 40px 80px;
   position: relative;
   z-index: 1;
+
+  .page-header {
+    margin-bottom: 32px;
+  }
 
   .page-label {
     font-family: "Space Mono", monospace;
@@ -191,7 +199,7 @@ body {
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   h1.page-title {
@@ -199,7 +207,7 @@ body {
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.02em;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
     span {
       color: var(--accent2);
@@ -210,7 +218,7 @@ body {
     color: var(--muted);
     font-size: $fs-content;
     font-family: "Space Mono", monospace;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 }
 
@@ -222,7 +230,7 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px;
+  padding: 20px;
 }
 
 .m-pill {
@@ -265,7 +273,7 @@ body {
 }
 
 .bar-bg {
-  height: 6px;
+  height: 5px;
   background: var(--border);
   border-radius: 99px;
   overflow: hidden;
@@ -280,7 +288,7 @@ body {
 .divider {
   height: 1px;
   background: var(--border);
-  margin: 28px 0;
+  margin: 24px 0;
 }
 
 .section-label {
@@ -289,13 +297,13 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--muted);
-  margin: 24px 0 10px;
+  margin: 20px 0 8px;
 }
 
 .grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
 
 // ==========================================
@@ -320,7 +328,7 @@ table.cost-table {
   }
 
   td {
-    padding: 9px 10px;
+    padding: 8px 10px;
     border-bottom: 1px solid var(--border);
     color: var(--text);
     vertical-align: top;
@@ -351,13 +359,13 @@ table.cost-table {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px 22px;
-  margin-bottom: 10px;
+  padding: 16px 18px;
+  margin-bottom: 8px;
 
   h3 {
-    font-size: 1em;
+    font-size: 0.95em;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -369,7 +377,7 @@ table.cost-table {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 9px 0;
+  padding: 8px 0;
   border-bottom: 1px solid var(--border);
 
   &:last-child {
@@ -381,7 +389,7 @@ table.cost-table {
     height: 7px;
     border-radius: 50%;
     flex-shrink: 0;
-    margin-top: 6px;
+    margin-top: 5px;
   }
 }
 
@@ -389,9 +397,9 @@ table.cost-table {
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 16px;
+  padding: 14px;
   flex: 1;
-  min-width: 430px;
+  min-width: 0;
 }
 
 textarea,
@@ -407,7 +415,7 @@ input[type=text] {
   transition: border-color 0.2s;
   width: 100%;
   resize: vertical;
-  min-height: 72px;
+  min-height: 64px;
   line-height: 1.6;
 
   &:focus {
@@ -475,7 +483,7 @@ input[type=text] {
 
 .hint {
   text-align: center;
-  margin-top: 48px;
+  margin-top: 40px;
   font-family: "Space Mono", monospace;
   font-size: $fs-label;
   color: var(--border);
@@ -487,15 +495,15 @@ input[type=text] {
 // ==========================================
 
 .milestone-block {
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 
   .milestone-block-header {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
     border-bottom: 1px solid var(--border);
   }
 }
@@ -527,7 +535,7 @@ input[type=text] {
   .pipe-row {
     display: grid;
     grid-template-columns: 36px 1fr;
-    gap: 0 16px;
+    gap: 0 14px;
 
     &:last-child .pipe-line {
       display: none;
@@ -540,8 +548,8 @@ input[type=text] {
     }
 
     .pipe-num {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -549,7 +557,7 @@ input[type=text] {
       align-items: center;
       justify-content: center;
       font-family: 'Space Mono', monospace;
-      font-size: $fs-rem-sm;
+      font-size: $fs-rem-xs;
       font-weight: 700;
       color: var(--accent);
       flex-shrink: 0;
@@ -567,8 +575,8 @@ input[type=text] {
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 14px 16px;
-      margin-bottom: 8px;
+      padding: 12px 14px;
+      margin-bottom: 6px;
       font-size: $fs-rem-body;
       line-height: 1.65;
       color: var(--muted);
@@ -601,8 +609,8 @@ input[type=text] {
 // --- Models ---
 .model-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
   margin-top: 4px;
 }
 
@@ -610,7 +618,7 @@ input[type=text] {
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 14px 16px;
+  padding: 12px 14px;
   font-size: $fs-rem-box;
 
   &.primary {
@@ -622,7 +630,7 @@ input[type=text] {
     font-size: $fs-rem-xs;
     color: var(--accent);
     letter-spacing: .06em;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     display: block;
 
     &.mtag-teal {
@@ -632,7 +640,7 @@ input[type=text] {
 
   .mname {
     font-weight: 700;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     font-size: $fs-rem-title;
   }
 
@@ -643,7 +651,7 @@ input[type=text] {
   }
 
   ul {
-    margin: 8px 0 0 0;
+    margin: 6px 0 0 0;
     padding: 0;
     list-style: none;
 
@@ -664,7 +672,7 @@ input[type=text] {
 .stat-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   margin-top: 8px;
 }
 
@@ -680,18 +688,18 @@ input[type=text] {
 
 .aug-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 7px;
   margin-top: 4px;
 
   .aug-item {
     background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 12px 14px;
+    padding: 10px 12px;
     font-size: $fs-rem-box;
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: flex-start;
     color: var(--muted);
     line-height: 1.55;
@@ -707,15 +715,15 @@ input[type=text] {
 // --- Metrics ---
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 7px;
   margin-top: 4px;
 
   .metric-box {
     background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 14px 16px;
+    padding: 12px 14px;
 
     .mlabel {
       font-family: 'Space Mono', monospace;
@@ -723,7 +731,7 @@ input[type=text] {
       color: var(--muted);
       letter-spacing: .08em;
       text-transform: uppercase;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .mval {
@@ -754,15 +762,15 @@ input[type=text] {
 // --- Deployment ---
 .deploy-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
   margin-top: 4px;
 
   .deploy-box {
     background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 16px;
+    padding: 14px;
     font-size: $fs-rem-box;
 
     .dtitle {
@@ -774,7 +782,7 @@ input[type=text] {
       font-family: 'Space Mono', monospace;
       font-size: $fs-rem-stat;
       color: var(--accent);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .ditem {
@@ -807,7 +815,7 @@ input[type=text] {
   border: 1px solid var(--border);
   border-left: 3px solid var(--accent2);
   border-radius: 10px;
-  padding: 16px 18px;
+  padding: 14px 16px;
   margin-top: 4px;
 
   .rlabel {
@@ -816,13 +824,13 @@ input[type=text] {
     color: var(--accent2);
     letter-spacing: .08em;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
 
   .rtitle {
     font-weight: 700;
     font-size: $fs-rem-title;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
 
   .rmeta {
@@ -836,7 +844,7 @@ input[type=text] {
   background: rgba(240, 112, 64, .06);
   border: 1px solid rgba(240, 112, 64, .2);
   border-radius: 8px;
-  padding: 14px 16px;
+  padding: 12px 14px;
   font-size: $fs-content;
   color: var(--muted);
   line-height: 1.7;
@@ -860,24 +868,24 @@ input[type=text] {
   background: rgba(240, 192, 64, .04);
   border: 1px solid rgba(240, 192, 64, .25);
   border-radius: var(--radius);
-  padding: 18px 22px;
+  padding: 16px 20px;
 
   .pdf-block-left {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
   }
 
   .pdf-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 8px;
     background: rgba(240, 192, 64, .1);
     border: 1px solid rgba(240, 192, 64, .25);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     flex-shrink: 0;
   }
 
@@ -909,7 +917,7 @@ input[type=text] {
     font-family: 'Space Mono', monospace;
     font-size: $fs-rem-btn;
     font-weight: 700;
-    padding: 9px 18px;
+    padding: 8px 16px;
     border-radius: 8px;
     background: var(--accent);
     color: #0d0f14;
@@ -922,7 +930,6 @@ input[type=text] {
       transform: translateY(-1px);
     }
   }
-
 }
 
 .text-active {
@@ -937,7 +944,7 @@ input[type=text] {
 
 .member-name {
   font-weight: 600;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   font-size: $fs-rem-title;
 }
 
@@ -948,7 +955,7 @@ input[type=text] {
 }
 
 .milestone-title {
-  font-size: 1.72rem;
+  font-size: 1.25rem;
   font-weight: 800;
 }
 
@@ -956,17 +963,85 @@ input[type=text] {
 // 11. RESPONSIVE (Media Queries)
 // ==========================================
 
+// Nagy képernyő: 2 oszlopos csapattag layout
+@media (min-width: 900px) {
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Közepes képernyő
+@media (max-width: 1024px) {
+  .page {
+    padding: 28px 28px 80px;
+  }
+}
+
+// Tablet
+@media (max-width: 768px) {
+  .page {
+    padding: 24px 20px 80px;
+    max-width: 100%;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .navbar {
+    padding: 0 20px;
+    gap: 12px;
+  }
+
+  .model-row {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+// Mobil
 @media (max-width: 640px) {
   .grid-4 {
     grid-template-columns: 1fr 1fr;
   }
 
   .navbar {
-    padding: 0 16px;
-    gap: 16px;
+    padding: 0 14px;
+    gap: 10px;
+    height: 44px;
+
+    .nav-status {
+      font-size: 0.78rem;
+    }
   }
 
   .page {
-    padding: 32px 16px 80px;
+    padding: 20px 14px 60px;
+  }
+
+  .milestone-block-header {
+    .pts-big {
+      font-size: 1.5rem;
+    }
+  }
+
+  .deploy-grid,
+  .aug-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .member-card {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+// Kis mobil
+@media (max-width: 420px) {
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .model-row {
+    grid-template-columns: 1fr;
   }
 }
