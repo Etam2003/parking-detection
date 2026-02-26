@@ -1,35 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap");
 
-// ═══════════════════════════════════════════
-//  BETŰMÉRET VÁLTOZÓK – itt állítsd be!
-// ═══════════════════════════════════════════
-$font-base: 17px; // alap szöveg
-$font-small: 0.78em; // kisebb szövegek (badge, hint, nav)
-$font-mono: 0.82em; // monospace szövegek
-$font-label: 0.72em; // section labelek (// Feladatok stb.)
-$font-h1-min: 2rem; // h1 minimum méret
-$font-h1-max: 3rem; // h1 maximum méret (nagy képernyőn)
+// ==========================================
+// 1. GLOBÁLIS DESIGN TOKENS (Változók)
+// ==========================================
 
-// ═══════════════════════════════════════════
-//  SZÍNEK & ALAP VÁLTOZÓK
-// ═══════════════════════════════════════════
+// --- Színek ---
+$color-bg: #0d0f14;
+$color-surface: #151820;
+$color-surface2: #1c2030;
+$color-border: #252a36;
+$color-accent: #f0c040;
+$color-accent2: #4af0c0;
+$color-accent3: #f07040;
+$color-text: #e8eaf0;
+$color-muted: #c0c0c0;
+$color-done-bg: #1a2a1f;
+$color-done-border: #2a4a30;
+$color-m1: #f0c040;
+$color-m2: #4af0c0;
+$color-m3: #f07040;
+
+// --- Betűméretek ---
+$fs-body: 20px;
+$fs-h1: clamp(2.5rem, 7vw, 4rem);
+$fs-nav: 1.17em;
+$fs-label: 1.08em;
+$fs-content: 1.23em;
+$fs-rem-xs: 0.93rem;
+$fs-rem-sm: 0.975rem;
+$fs-rem-md: 1.05rem;
+$fs-rem-stat: 1.02rem;
+$fs-rem-btn: 1.125rem;
+$fs-rem-sub: 1.17rem;
+$fs-rem-list: 1.2rem;
+$fs-rem-ditem: 1.215rem;
+$fs-rem-box: 1.26rem;
+$fs-rem-body: 1.29rem;
+$fs-rem-title: 1.38rem;
+$fs-rem-xl: 2.25rem;
+$fs-rem-xxl: 2.7rem;
+$radius-main: 18px;
+$border-width: 1px;
+
+// CSS változók szinkronizálása a :root-tal
 :root {
-  --bg: #0d0f14;
-  --surface: #151820;
-  --surface2: #1c2030;
-  --border: #252a36;
-  --accent: #f0c040;
-  --accent2: #4af0c0;
-  --accent3: #f07040;
-  --text: #e8eaf0;
-  --muted: #6b7280;
-  --done-bg: #1a2a1f;
-  --done-border: #2a4a30;
-  --m1: #f0c040;
-  --m2: #4af0c0;
-  --m3: #f07040;
-  --radius: 12px;
+  --bg: #{$color-bg};
+  --surface: #{$color-surface};
+  --surface2: #{$color-surface2};
+  --border: #{$color-border};
+  --accent: #{$color-accent};
+  --accent2: #{$color-accent2};
+  --accent3: #{$color-accent3};
+  --text: #{$color-text};
+  --muted: #{$color-muted};
+  --done-bg: #{$color-done-bg};
+  --done-border: #{$color-done-border};
+  --m1: #{$color-m1};
+  --m2: #{$color-m2};
+  --m3: #{$color-m3};
+  --radius: #{$radius-main};
 }
+
+// ==========================================
+// 2. ALAPSTÍLUSOK
+// ==========================================
 
 * {
   box-sizing: border-box;
@@ -40,27 +74,31 @@ $font-h1-max: 3rem; // h1 maximum méret (nagy képernyőn)
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Syne', sans-serif;
-  font-size: $font-base;
+  font-family: "Syne", sans-serif;
+  font-size: $fs-body;
   min-height: 100vh;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-  opacity: .35;
-}
+// ==========================================
+// 3. NAVIGÁCIÓ & ANIMÁCIÓK
+// ==========================================
 
-// ── NAVBAR ──
 .navbar {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(13, 15, 20, .92);
+  background: rgba(13, 15, 20, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   padding: 0 32px;
@@ -68,60 +106,60 @@ body::before {
   align-items: center;
   gap: 32px;
   height: 56px;
-}
 
-.nav-brand {
-  font-family: 'Space Mono', monospace;
-  font-size: $font-small;
-  font-weight: 700;
-  color: var(--accent);
-  text-decoration: none;
-  letter-spacing: .05em;
-  white-space: nowrap;
-}
-
-.nav-links {
-  display: flex;
-  gap: 4px;
-  flex: 1;
-}
-
-.nav-link {
-  font-family: 'Space Mono', monospace;
-  font-size: $font-small;
-  color: var(--muted);
-  text-decoration: none;
-  padding: 6px 14px;
-  border-radius: 8px;
-  transition: color .2s, background .2s;
-  letter-spacing: .05em;
-
-  &:hover {
-    color: var(--text);
-    background: var(--surface);
-  }
-
-  &.active {
+  .nav-brand {
+    font-family: "Space Mono", monospace;
+    font-size: $fs-nav;
+    font-weight: 700;
     color: var(--accent);
-    background: rgba(240, 192, 64, .1);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
   }
-}
 
-.nav-status {
-  font-family: 'Space Mono', monospace;
-  font-size: $font-small;
-  color: var(--muted);
-  white-space: nowrap;
-}
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    flex: 1;
 
-.nav-dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent2);
-  margin-right: 6px;
-  animation: pulse 2s infinite;
+    .nav-link {
+      font-family: "Space Mono", monospace;
+      font-size: $fs-nav;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+      letter-spacing: 0.05em;
+
+      &:hover {
+        color: var(--text);
+        background: var(--surface);
+      }
+
+      &.active {
+        color: var(--accent);
+        background: rgba(240, 192, 64, 0.1);
+      }
+    }
+  }
+
+  .nav-status {
+    font-family: "Space Mono", monospace;
+    font-size: $fs-nav;
+    color: var(--muted);
+    white-space: nowrap;
+
+    .nav-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent2);
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+  }
 }
 
 @keyframes pulse {
@@ -132,49 +170,54 @@ body::before {
   }
 
   50% {
-    opacity: .3;
+    opacity: 0.3;
   }
 }
 
-// ── PAGE ──
+// ==========================================
+// 4. OLDALSTRUKTÚRA & TYPO
+// ==========================================
+
 .page {
   max-width: 920px;
   margin: 0 auto;
   padding: 48px 24px 100px;
   position: relative;
   z-index: 1;
-}
 
-// ── TYPOGRAPHY ──
-.page-label {
-  font-family: 'Space Mono', monospace;
-  font-size: $font-label;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 8px;
-}
+  .page-label {
+    font-family: "Space Mono", monospace;
+    font-size: $fs-label;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
 
-h1.page-title {
-  font-size: clamp($font-h1-min, 5vw, $font-h1-max);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -.02em;
-  margin-bottom: 12px;
+  h1.page-title {
+    font-size: $fs-h1;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
 
-  span {
-    color: var(--accent2);
+    span {
+      color: var(--accent2);
+    }
+  }
+
+  .page-sub {
+    color: var(--muted);
+    font-size: $fs-content;
+    font-family: "Space Mono", monospace;
+    line-height: 1.6;
   }
 }
 
-.page-sub {
-  color: var(--muted);
-  font-size: $font-mono;
-  font-family: 'Space Mono', monospace;
-  line-height: 1.6;
-}
+// ==========================================
+// 5. UI KOMPONENSEK (Pill, Card, Bar)
+// ==========================================
 
-// ── CARD ──
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -182,96 +225,94 @@ h1.page-title {
   padding: 24px;
 }
 
-// ── PILLS ──
 .m-pill {
-  font-family: 'Space Mono', monospace;
-  font-size: $font-label;
+  font-family: "Space Mono", monospace;
+  font-size: $fs-label;
   font-weight: 700;
   padding: 3px 10px;
   border-radius: 99px;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   white-space: nowrap;
 }
 
 .m1-pill {
-  background: rgba(240, 192, 64, .14);
+  background: rgba(240, 192, 64, 0.14);
   color: var(--m1);
-  border: 1px solid rgba(240, 192, 64, .3);
+  border: 1px solid rgba(240, 192, 64, 0.3);
 }
 
 .m2-pill {
-  background: rgba(74, 240, 192, .1);
+  background: rgba(74, 240, 192, 0.1);
   color: var(--m2);
-  border: 1px solid rgba(74, 240, 192, .3);
+  border: 1px solid rgba(74, 240, 192, 0.3);
 }
 
 .m3-pill {
-  background: rgba(240, 112, 64, .1);
+  background: rgba(240, 112, 64, 0.1);
   color: var(--m3);
-  border: 1px solid rgba(240, 112, 64, .3);
+  border: 1px solid rgba(240, 112, 64, 0.3);
 }
 
 .wip-badge {
-  font-family: 'Space Mono', monospace;
-  font-size: $font-label;
+  font-family: "Space Mono", monospace;
+  font-size: $fs-label;
   padding: 2px 8px;
   border-radius: 99px;
-  background: rgba(240, 192, 64, .12);
+  background: rgba(240, 192, 64, 0.12);
   color: var(--accent);
-  border: 1px solid rgba(240, 192, 64, .3);
+  border: 1px solid rgba(240, 192, 64, 0.3);
 }
 
-// ── BAR ──
 .bar-bg {
   height: 6px;
   background: var(--border);
   border-radius: 99px;
   overflow: hidden;
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
-.bar-fill {
-  height: 100%;
-  border-radius: 99px;
-  transition: width .5s cubic-bezier(.4, 0, .2, 1);
-}
-
-// ── DIVIDER ──
 .divider {
   height: 1px;
   background: var(--border);
   margin: 28px 0;
 }
 
-// ── SECTION LABEL ──
 .section-label {
-  font-family: 'Space Mono', monospace;
-  font-size: $font-label;
+  font-family: "Space Mono", monospace;
+  font-size: $fs-label;
   text-transform: uppercase;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   color: var(--muted);
   margin: 24px 0 10px;
 }
 
-// ── GRIDS ──
 .grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 
-// ── TABLE ──
+// ==========================================
+// 6. TÁBLÁZATOK
+// ==========================================
+
 table.cost-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: $font-mono;
+  font-size: $fs-content;
   margin-top: 10px;
 
   th {
-    font-family: 'Space Mono', monospace;
-    font-size: $font-label;
+    font-family: "Space Mono", monospace;
+    font-size: $fs-label;
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     color: var(--muted);
     text-align: left;
     padding: 6px 10px;
@@ -286,7 +327,7 @@ table.cost-table {
     line-height: 1.5;
 
     &:last-child {
-      font-family: 'Space Mono', monospace;
+      font-family: "Space Mono", monospace;
       color: var(--accent);
       white-space: nowrap;
     }
@@ -295,14 +336,17 @@ table.cost-table {
   tr:last-child td {
     border-bottom: none;
   }
+
+  .total-row td {
+    font-weight: 700 !important;
+    background: rgba(240, 192, 64, 0.05);
+  }
 }
 
-.total-row td {
-  font-weight: 700 !important;
-  background: rgba(240, 192, 64, .05);
-}
+// ==========================================
+// 7. CONTENT BLOCKS & FORMS
+// ==========================================
 
-// ── CONTENT BLOCK ──
 .content-block {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -321,7 +365,6 @@ table.cost-table {
   }
 }
 
-// ── TASK LIST ──
 .task-item {
   display: flex;
   align-items: flex-start;
@@ -332,38 +375,36 @@ table.cost-table {
   &:last-child {
     border-bottom: none;
   }
+
+  .task-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
 }
 
-.task-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 6px;
-}
-
-// ── MEMBER CARD ──
 .member-card {
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 16px;
   flex: 1;
-  min-width: 220px;
+  min-width: 430px;
 }
 
-// ── FORM ──
 textarea,
-input[type="text"] {
+input[type=text] {
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--text);
-  font-family: 'Space Mono', monospace;
-  font-size: $font-mono;
+  font-family: "Space Mono", monospace;
+  font-size: $fs-content;
   padding: 8px 12px;
   outline: none;
-  transition: border-color .2s;
+  transition: border-color 0.2s;
   width: 100%;
   resize: vertical;
   min-height: 72px;
@@ -374,19 +415,22 @@ input[type="text"] {
   }
 }
 
-// ── TOAST ──
+// ==========================================
+// 8. TOAST & FEEDBACK
+// ==========================================
+
 .toast {
   position: fixed;
   bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Space Mono', monospace;
-  font-size: $font-small;
+  font-family: "Space Mono", monospace;
+  font-size: $fs-nav;
   padding: 10px 22px;
   border-radius: 99px;
   z-index: 999;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
   pointer-events: none;
   white-space: nowrap;
 
@@ -401,7 +445,6 @@ input[type="text"] {
   }
 }
 
-// ── ANIMATIONS ──
 @keyframes fadeDown {
   from {
     opacity: 0;
@@ -415,32 +458,504 @@ input[type="text"] {
 }
 
 .fade-in {
-  animation: fadeDown .5s ease both;
+  animation: fadeDown 0.5s ease both;
 }
 
 .fade-in-2 {
-  animation: fadeDown .5s .08s ease both;
+  animation: fadeDown 0.5s 0.08s ease both;
 }
 
 .fade-in-3 {
-  animation: fadeDown .5s .16s ease both;
+  animation: fadeDown 0.5s 0.16s ease both;
 }
 
 .fade-in-4 {
-  animation: fadeDown .5s .24s ease both;
+  animation: fadeDown 0.5s 0.24s ease both;
 }
 
-// ── HINT ──
 .hint {
   text-align: center;
   margin-top: 48px;
-  font-family: 'Space Mono', monospace;
-  font-size: $font-label;
+  font-family: "Space Mono", monospace;
+  font-size: $fs-label;
   color: var(--border);
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
 }
 
-// ── RESPONSIVE ──
+// ==========================================
+// 9. MILESTONES & M1 SPECIÁLIS STÍLUSOK
+// ==========================================
+
+.milestone-block {
+  margin-bottom: 48px;
+
+  .milestone-block-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+.deadline-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: $fs-rem-md;
+  color: var(--muted);
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+}
+
+.pts-big {
+  font-family: 'Space Mono', monospace;
+  font-size: $fs-rem-xxl;
+  font-weight: 700;
+  line-height: 1;
+  margin-left: auto;
+}
+
+// --- Pipeline ---
+.pipe-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 4px;
+
+  .pipe-row {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 0 16px;
+
+    &:last-child .pipe-line {
+      display: none;
+    }
+
+    .pipe-col-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pipe-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: $fs-rem-sm;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .pipe-line {
+      flex: 1;
+      width: 1px;
+      background: var(--border);
+      margin: 4px 0;
+      min-height: 10px;
+    }
+
+    .pipe-body {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      font-size: $fs-rem-body;
+      line-height: 1.65;
+      color: var(--muted);
+
+      strong {
+        color: var(--text);
+      }
+
+      .pbadge {
+        font-family: 'Space Mono', monospace;
+        font-size: $fs-rem-xs;
+        padding: 2px 7px;
+        border-radius: 4px;
+        margin-left: 6px;
+        background: rgba(240, 192, 64, .12);
+        color: var(--accent);
+        border: 1px solid rgba(240, 192, 64, .2);
+        vertical-align: middle;
+
+        &.pbadge-teal {
+          background: rgba(74, 240, 192, .1);
+          color: var(--accent2);
+          border-color: rgba(74, 240, 192, .2);
+        }
+      }
+    }
+  }
+}
+
+// --- Models ---
+.model-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.model-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: $fs-rem-box;
+
+  &.primary {
+    border-color: rgba(240, 192, 64, .3);
+  }
+
+  .mtag {
+    font-family: 'Space Mono', monospace;
+    font-size: $fs-rem-xs;
+    color: var(--accent);
+    letter-spacing: .06em;
+    margin-bottom: 6px;
+    display: block;
+
+    &.mtag-teal {
+      color: var(--accent2);
+    }
+  }
+
+  .mname {
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: $fs-rem-title;
+  }
+
+  .mdesc {
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: $fs-content;
+  }
+
+  ul {
+    margin: 8px 0 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      color: var(--muted);
+      font-size: $fs-rem-list;
+      padding: 2px 0;
+
+      &::before {
+        content: '→ ';
+        color: var(--accent2);
+      }
+    }
+  }
+}
+
+// --- Stats & Augmentation ---
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.stat-chip {
+  font-family: 'Space Mono', monospace;
+  font-size: $fs-rem-stat;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(74, 240, 192, .2);
+  color: var(--accent2);
+  background: rgba(74, 240, 192, .06);
+}
+
+.aug-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 8px;
+  margin-top: 4px;
+
+  .aug-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: $fs-rem-box;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: var(--muted);
+    line-height: 1.55;
+
+    strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 2px;
+    }
+  }
+}
+
+// --- Metrics ---
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+  margin-top: 4px;
+
+  .metric-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+
+    .mlabel {
+      font-family: 'Space Mono', monospace;
+      font-size: $fs-rem-xs;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .mval {
+      font-size: $fs-rem-xl;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      font-family: 'Space Mono', monospace;
+      margin-bottom: 4px;
+
+      &.teal {
+        color: var(--accent2);
+      }
+
+      &.orange {
+        color: var(--accent3);
+      }
+    }
+
+    .msub {
+      font-size: $fs-rem-sub;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+  }
+}
+
+// --- Deployment ---
+.deploy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+  margin-top: 4px;
+
+  .deploy-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    font-size: $fs-rem-box;
+
+    .dtitle {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .dprice {
+      font-family: 'Space Mono', monospace;
+      font-size: $fs-rem-stat;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .ditem {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      color: var(--muted);
+      font-size: $fs-rem-ditem;
+      padding: 2px 0;
+      line-height: 1.5;
+
+      &.ditem-pro::before {
+        content: '✓';
+        color: var(--accent2);
+        flex-shrink: 0;
+      }
+
+      &.ditem-con::before {
+        content: 'x';
+        color: var(--accent3);
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+// --- References & License ---
+.ref-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent2);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-top: 4px;
+
+  .rlabel {
+    font-family: 'Space Mono', monospace;
+    font-size: $fs-rem-xs;
+    color: var(--accent2);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .rtitle {
+    font-weight: 700;
+    font-size: $fs-rem-title;
+    margin-bottom: 6px;
+  }
+
+  .rmeta {
+    font-size: $fs-content;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+}
+
+.license-note {
+  background: rgba(240, 112, 64, .06);
+  border: 1px solid rgba(240, 112, 64, .2);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: $fs-content;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-top: 4px;
+
+  strong {
+    color: var(--accent3);
+  }
+}
+
+// ==========================================
+// 10. PDF BLOKK
+// ==========================================
+
+.pdf-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: rgba(240, 192, 64, .04);
+  border: 1px solid rgba(240, 192, 64, .25);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+
+  .pdf-block-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .pdf-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(240, 192, 64, .1);
+    border: 1px solid rgba(240, 192, 64, .25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .pdf-info-label {
+    font-family: 'Space Mono', monospace;
+    font-size: $fs-rem-sm;
+    color: var(--accent);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .pdf-info-name {
+    font-weight: 700;
+    font-size: $fs-rem-title;
+  }
+
+  .pdf-info-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: $fs-rem-stat;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: $fs-rem-btn;
+    font-weight: 700;
+    padding: 9px 18px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #0d0f14;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .2s, transform .15s;
+
+    &:hover {
+      background: #f5cc55;
+      transform: translateY(-1px);
+    }
+  }
+
+}
+
+.text-active {
+  color: var(--text);
+  font-size: $fs-content;
+}
+
+.text-muted {
+  color: var(--muted);
+  font-size: $fs-content;
+}
+
+.member-name {
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: $fs-rem-title;
+}
+
+.member-contribution {
+  font-size: $fs-label;
+  line-height: 1.75;
+  font-family: 'Space Mono', monospace;
+}
+
+.milestone-title {
+  font-size: 1.72rem;
+  font-weight: 800;
+}
+
+// ==========================================
+// 11. RESPONSIVE (Media Queries)
+// ==========================================
+
 @media (max-width: 640px) {
   .grid-4 {
     grid-template-columns: 1fr 1fr;

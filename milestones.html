@@ -1,248 +1,306 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parkoló Detektálás - Mérföldkövek</title>
-<link rel="stylesheet" href="css/style.css">
-<style>
-  .milestone-block { margin-bottom: 48px; }
-
-  .milestone-block-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .deadline-badge {
-    font-family: 'Space Mono', monospace;
-    font-size: .7rem;
-    color: var(--muted);
-    padding: 3px 10px;
-    border: 1px solid var(--border);
-    border-radius: 99px;
-  }
-
-  .pts-big {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.8rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-left: auto;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parkoló Detektálás - Mérföldkövek</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<nav class="navbar">
-  <a class="nav-brand" href="index.html">🅿 PARKING</a>
-  <div class="nav-links">
-    <a class="nav-link" href="index.html">Főoldal</a>
-    <a class="nav-link" href="milestones.html">Mérföldkövek</a>
+  <nav class="navbar">
+    <a class="nav-brand" href="index.html">🅿 PARKING</a>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Főoldal</a>
+      <a class="nav-link" href="milestones.html">Mérföldkövek</a>
+    </div>
+    <div class="nav-status">
+      <span class="nav-dot"></span>
+      <span id="nav-score">- / 30 pt</span>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-header fade-in">
+      <div class="page-label">// Projekt haladás</div>
+      <h1 class="page-title">Mérföld<span>kövek</span></h1>
+    </div>
+
+    <div id="milestones-container"></div>
+
+    <div class="hint">// szerkesztés: data.json módosítása → push → ~30mp múlva élő</div>
   </div>
-  <div class="nav-status">
-    <span class="nav-dot"></span>
-    <span id="nav-score">- / 30 pt</span>
-  </div>
-</nav>
 
-<div class="page">
-
-  <div class="fade-in" style="border-left:4px solid var(--accent2); padding-left:20px; margin-bottom:40px;">
-    <div class="page-label">// Projekt haladás</div>
-    <h1 class="page-title">Mérföld<span>kövek</span></h1>
-    <p class="page-sub">Feladatok, tartalom és csapattagok hozzájárulásai mérföldkövenként.<br>
-    Az adatok frissítéséhez szerkeszd a <code style="color:var(--accent);">data.json</code> fájlt a repóban.</p>
-  </div>
-
-  <div id="milestones-container"></div>
-
-  <div class="hint">// szerkesztés: data.json módosítása → push → ~30mp múlva élő</div>
-</div>
-
-<script src="js/shared.js"></script>
-<script>
-const META = [
-  {
-    id: 'm1', label: '1. Mérföldkő', title: 'Tervezés & Dokumentáció',
-    max: 5, color: 'var(--m1)', pill: 'm1-pill',
-    deadline: '2026-03-01', deadlineLabel: '2026. márc. 1. 23:59',
-    description: 'Egy PDF dokumentumban kell leadni az algoritmus tervet szakirodalom alapján és a költségbecslést. Egy weboldalon nyilván kell tartani a projekt haladását. Fel kell jegyezni, hogy melyik csapattag mit csinált.',
-    tasks: [
-      { label: 'PDF dokumentum: algoritmus terv + költségbecslés', done: true },
-      { label: 'Weboldal a projekt haladásának nyilvántartásához', done: true },
-      { label: 'Csapattagok hozzájárulásainak dokumentálása', done: true },
-    ],
-    content: [
+  <script src="js/shared.js"></script>
+  <script>
+    const META = [
       {
-        icon: '📐', title: 'Algoritmus Terv', wip: true,
-        html: `<p style="color:var(--muted); font-size:.88rem; line-height:1.8;">
-          Ez a tartalom még egyeztetés alatt áll. A végleges algoritmus terv
-          ide kerül majd a szakirodalmi hivatkozásokkal és architektúra vázlattal.
-        </p>`
+        id: 'm1', label: '1. Mérföldkő', title: 'Tervezés & Dokumentáció',
+        max: 5, color: 'var(--m1)', pill: 'm1-pill',
+        deadline: '2026-03-01', deadlineLabel: '2026. márc. 1. 23:59',
+        description: 'Egy PDF dokumentumban kell leadni az algoritmus tervet szakirodalom alapján és a költségbecslést. Egy weboldalon nyilván kell tartani a projekt haladását. Fel kell jegyezni, hogy melyik csapattag mit csinált.',
+        tasks: [
+          { label: 'PDF dokumentum: algoritmus terv + költségbecslés', done: true },
+          { label: 'Weboldal a projekt haladásának nyilvántartásához', done: true },
+          { label: 'Csapattagok hozzájárulásainak dokumentálása', done: true },
+        ],
+        content: [
+          {
+            icon: '📄', title: 'Teljes dokumentáció', wip: false,
+            html: `
+              <div class="pdf-block">
+                <div class="pdf-block-left">
+                  <div class="pdf-icon">📄</div>
+                  <div class="pdf-info">
+                    <div class="pdf-info-label">M1 · Leadott dokumentum</div>
+                    <div class="pdf-info-name">Algoritmus terv & Költségbecslés</div>
+                    <div class="pdf-info-sub">m1_doc.pdf · PDF formátum</div>
+                  </div>
+                </div>
+                <a class="pdf-btn" href="docs/m1_doc.pdf" target="_blank" rel="noopener">↗ Megnyitás</a>
+              </div>`
+          },
+          {
+            icon: '📐', title: 'Probléma és tervezési cél', wip: false,
+            html: `
+              <p class="page-sub">
+                A feladat célja olyan képalapú és/vagy videóalapú megoldás tervezése, amely megbízhatóan felismeri,
+                hogy az egyes parkolóhelyek <strong>foglaltak vagy szabadok</strong> —
+                eltérő kameranézetek, perspektívák, fényviszonyok és láthatósági körülmények mellett is.
+              </p>
+              <div class="model-row">
+                <div class="model-box primary">
+                  <div class="mname">🎯 Bináris osztályozás</div>
+                  <div class="mdesc">Minden parkolóhely állapotának meghatározása: szabad vagy foglalt</div>
+                </div>
+                <div class="model-box">
+                  <div class="mname">📷 Robusztusság</div>
+                  <div class="mdesc">Működés különböző perspektívákban, fényviszonyokban, időjárásban</div>
+                </div>
+                <div class="model-box">
+                  <div class="mname">⏱ Stabilitás</div>
+                  <div class="mdesc">Téves váltások csökkentése: árnyék vagy áthaladó jármű ne okozzon azonnali jelzésváltozást</div>
+                </div>
+                <div class="model-box">
+                  <div class="mname">🔬 Kétszintű tervezés</div>
+                  <div class="mdesc">Prototípus szint (kutatás/validáció) és üzemi pilot szint (folyamatos videófeldolgozás)</div>
+                </div>
+              </div>`
+          },
+          {
+            icon: '📚', title: 'Irodalmi háttér és megközelítések', wip: false,
+            html: `
+              <p class="page-sub">A szakirodalomban négy fő megközelítés terjedt el:</p>
+              <div class="pipe-wrap">
+                <div class="pipe-row">
+                  <div class="pipe-col-left"><div class="pipe-num">01</div></div>
+                  <div class="pipe-body"><strong>Egyedi parkolóhely-kivágások osztályozása</strong> — ROI-alapú megközelítés, egyszerű és hatékony.</div>
+                </div>
+                <div class="pipe-row">
+                  <div class="pipe-col-left"><div class="pipe-num">02</div></div>
+                  <div class="pipe-body"><strong>Járműdetektálás objektumdetektorral</strong> — YOLO-alapú detektálás bounding box logikával.</div>
+                </div>
+                <div class="pipe-row">
+                  <div class="pipe-col-left"><div class="pipe-num">03</div></div>
+                  <div class="pipe-body"><strong>Szegmentálás alapú megoldások</strong> — pixel-pontos maszkokkal pontosabb fedési arány.</div>
+                </div>
+                <div class="pipe-row">
+                  <div class="pipe-col-left"><div class="pipe-num">04</div></div>
+                  <div class="pipe-body"><strong>Többkamerás / edge feldolgozás</strong> — peremhálózaton futó, elosztott megoldások.</div>
+                </div>
+              </div>
+              <div class="section-label">Benchmark adatbázisok</div>
+              <div class="model-row">
+                <div class="model-box">
+                  <div class="mname">PKLot</div>
+                  <div class="mdesc">Klasszikus benchmark, sok időjárási és fényviszonyt tartalmaz.</div>
+                </div>
+                <div class="model-box">
+                  <div class="mname">CNRPark+EXT</div>
+                  <div class="mdesc">Több kamera- és nézőpont-változatot tartalmaz.</div>
+                </div>
+              </div>
+              <div class="ref-box">
+                <div class="rlabel">📄 Kulcs hivatkozás</div>
+                <div class="rtitle">Amato et al. (2017) — Deep learning for decentralized parking lot occupancy detection</div>
+                <div class="rmeta">Expert Systems with Applications, 72, 327-334. DOI: 10.1016/j.eswa.2016.10.055</div>
+                <div class="stat-row">
+                  <span class="stat-chip">~98% — PKLot</span>
+                  <span class="stat-chip">~90% — CNRPark-EXT</span>
+                  <span class="stat-chip">15-35% jobb vs SVM</span>
+                  <span class="stat-chip">3x kisebb mint AlexNet</span>
+                </div>
+              </div>`
+          },
+          {
+            icon: '⚙️', title: 'Javasolt algoritmus és feldolgozási lánc', wip: false,
+            html: `
+              <p class="page-sub">Fix parkolóban: <strong>előre definiált polygonok + járműdetektálás.</strong></p>
+              <div class="pipe-wrap">
+                <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">01</div><div class="pipe-line"></div></div><div class="pipe-body"><strong>Kamera beállítás és ROI-k</strong> <span class="pbadge">Egyszeri</span><br>Kamera rögzítése, polygonok felvétele CVAT-ban.</div></div>
+                <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">02</div><div class="pipe-line"></div></div><div class="pipe-body"><strong>Előfeldolgozás</strong><br>Normalizálás, zajszűrés, CLAHE kontraszt korrekció.</div></div>
+                <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">03</div><div class="pipe-line"></div></div><div class="pipe-body"><strong>Detektálás / Szegmentálás</strong> <span class="pbadge">Core</span><br>Járművek felismerése YOLO-alapú modellen.</div></div>
+                <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">04</div><div class="pipe-line"></div></div><div class="pipe-body"><strong>Térbeli logika</strong><br>Parkolóhelyenként IoU / maszkfedettség számítása.</div></div>
+                <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">05</div><div class="pipe-line"></div></div><div class="pipe-body"><strong>Időbeli stabilizálás</strong> <span class="pbadge pbadge-teal">Fontos</span><br>Hiszterézis + 5-10 frame-es szavazás a villogás ellen.</div></div>
+                <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">06</div></div><div class="pipe-body"><strong>Kimeneti réteg</strong><br>Státusz, megbízhatósági pontszám, időbélyeg.</div></div>
+              </div>
+              <div class="section-label">Ajánlott modellek</div>
+              <div class="model-row">
+                <div class="model-box primary"><span class="mtag">⭐ Elsődleges</span><div class="mname">YOLO Szegmentálás</div><div class="mdesc">Pixel-pontos maszkok precíz IoU-hoz.</div><ul><li>Gyors inferencia</li><li>Jetson Orin-on fut</li></ul></div>
+                <div class="model-box"><span class="mtag">⚡ Gyorsabb</span><div class="mname">YOLO Detektálás</div><div class="mdesc">Bounding box alapú logika.</div><ul><li>Magasabb FPS</li><li>Kisebb igény</li></ul></div>
+                <div class="model-box"><span class="mtag mtag-teal">🔋 Edge alternatíva</span><div class="mname">SSD-MobileNetV2</div><div class="mdesc">Raspberry Pi szintű hardverekhez.</div></div>
+              </div>`
+          },
+          {
+            icon: '🗃️', title: 'Adatkezelés és augmentáció', wip: false,
+            html: `
+              <p class="page-sub">Benchmarkok: <strong>PKLot, CNRPark+EXT</strong>. A végső modellhez saját adatok szükségesek.</p>
+              <div class="model-row">
+                <div class="model-box"><strong>① Parkolóhely polygonok</strong><br><span class="text-muted">Ritkán változik, egyszeri beállítás.</span></div>
+                <div class="model-box"><strong>② Járműobjektumok</strong><br><span class="text-muted">Annotálás CVAT-ban.</span></div>
+              </div>
+              <div class="section-label">Adatnövelési technikák</div>
+              <div class="aug-grid">
+                <div class="aug-item"><span>☀️</span><div><strong>Fényerő / kontraszt</strong>Véletlenszerű augmentáció</div></div>
+                <div class="aug-item"><span>🌧</span><div><strong>Időjárás szimuláció</strong>Eső, hó, latyak hatások</div></div>
+                <div class="aug-item"><span>💨</span><div><strong>Elmosás és zaj</strong>Kamera hiba szimuláció</div></div>
+                <div class="aug-item"><span>🚗</span><div><strong>Takarás</strong>Random cropok, occlusion</div></div>
+                <div class="aug-item"><span>📐</span><div><strong>Perspective warp</strong>Geometriai torzítás</div></div>
+              </div>`
+          },
+          {
+            icon: '📊', title: 'Kiértékelési metrikák', wip: false,
+            html: `
+              <div class="metrics-grid">
+                <div class="metric-box"><div class="mlabel">Hely-szintű</div><div class="mval">F1</div><div class="msub">Accuracy, Precision, Recall</div></div>
+                <div class="metric-box"><div class="mlabel">Stabilitás</div><div class="mval teal">Flicker</div><div class="msub">Téves váltások / óra</div></div>
+                <div class="metric-box"><div class="mlabel">Teljesítmény</div><div class="mval orange">FPS</div><div class="msub">GPU/CPU kihasználtság</div></div>
+                <div class="metric-box"><div class="mlabel">Robusztusság</div><div class="mval">Δ%</div><div class="msub">Pontosság napszak szerint</div></div>
+              </div>`
+          },
+          {
+            icon: '🖥️', title: 'Telepítési architektúra', wip: false,
+            html: `
+              <div class="deploy-grid">
+                <div class="deploy-box"><div class="dtitle">💻 Alacsony költségű pilot</div><div class="dprice">1 kamera + meglévő PC</div><div class="ditem ditem-pro">Gyors indulás</div><div class="ditem ditem-con">Hálózatfüggő</div></div>
+                <div class="deploy-box"><div class="dtitle">⚡ Edge pilot</div><div class="dprice">1-4 kamera + Jetson Orin</div><div class="ditem ditem-pro">Helyi feldolgozás</div><div class="ditem ditem-con">Hardver költség</div></div>
+                <div class="deploy-box"><div class="dtitle">☁️ Szerver / Felhő</div><div class="dprice">Edge inferencia + Felhő tanítás</div><div class="ditem ditem-pro">Skálázható</div><div class="ditem ditem-con">GPU bérleti díj</div></div>
+              </div>`
+          },
+          {
+            icon: '💰', title: 'Költségbecslés', wip: false,
+            html: `
+              <div class="section-label">Hardware komponensek</div>
+              <table class="cost-table">
+                <tr><th>Komponens</th><th>Irányár</th></tr>
+                <tr><td>Hikvision DS-2CD1347G0-L</td><td>~49 661 Ft</td></tr>
+                <tr><td>Reolink RLC-811A</td><td>~60 000 Ft</td></tr>
+                <tr><td>TP-Link PoE switch</td><td>~14 510 Ft</td></tr>
+                <tr><td>Samsung 870 EVO 1TB SSD</td><td>~86 990 Ft</td></tr>
+                <tr><td>Jetson Orin Nano Super</td><td>~144 330 Ft</td></tr>
+              </table>
+              <div class="section-label">Projekt szcenáriók</div>
+              <table class="cost-table">
+                <tr><th>Szcenárió</th><th>Becsült összköltség</th></tr>
+                <tr><td><strong>A</strong> — Kutatási prototípus</td><td>64 661 - 93 650 Ft</td></tr>
+                <tr><td><strong>B</strong> — 1 kamerás edge pilot</td><td>250 707 - 349 480 Ft</td></tr>
+                <tr><td><strong>C</strong> — 4 kamerás edge pilot</td><td>419 690 - 600 430 Ft</td></tr>
+              </table>
+              <div class="license-note"><strong>Licenc:</strong> Az OpenCV és PyTorch nyílt forrású. Az Ultralytics kereskedelmi célra licencköteles lehet.</div>`
+          }
+        ]
       },
       {
-        icon: '📚', title: 'Képi adatbázisok (Dataset források)', wip: true,
-        html: `<p style="color:var(--muted); font-size:.88rem; line-height:1.8;">
-          Ez a tartalom még egyeztetés alatt áll. A tervezett adatbázis-forrásokhoz
-          linkek és rövid leírások kerülnek ide.
-        </p>`
+        id: 'm2', label: '2. Mérföldkő', title: 'Algoritmus Implementálása',
+        max: 10, color: 'var(--m2)', pill: 'm2-pill',
+        deadline: '2026-04-12', deadlineLabel: '2026. ápr. 12. 23:59',
+        description: 'A kezdeti algoritmus implementálása és az első eredmények bemutatása.',
+        tasks: [
+          { label: 'PDF: algoritmus leírás + első eredmények', done: false },
+          { label: 'Weboldal frissítése eredményekkel', done: false },
+        ],
+        content: [{ icon: '🔜', title: 'Hamarosan', wip: true, html: `<p class="page-sub">Április 12. előtt kerül ide.</p>` }]
       },
       {
-        icon: '💰', title: 'Költségbecslés (Hardware + Szoftver)', wip: false,
-        html: `
-        <div style="margin-bottom:18px;">
-          <div style="font-family:'Space Mono',monospace; font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">Hardware eszközök</div>
-          <table class="cost-table">
-            <tr><th>Eszköz</th><th>Típus / Leírás</th><th>Becsült ár</th></tr>
-            <tr><td><strong>IP Kamera</strong></td><td>Reolink RLC-810A (4K, AI ember/autó detektálás, éjjellátó)</td><td>~45 000 Ft</td></tr>
-            <tr><td><strong>Kamera tartó/konzol</strong></td><td>Kültéri oszloptartó</td><td>~8 000 Ft</td></tr>
-            <tr><td><strong>Számítási egység</strong></td><td>NVIDIA Jetson Orin Nano (Edge AI-ra optimalizált)</td><td>~220 000 Ft</td></tr>
-            <tr><td><strong>Hálózati eszközök</strong></td><td>PoE Switch + CAT6 kábelezés (20m)</td><td>~25 000 Ft</td></tr>
-            <tr class="total-row"><td colspan="2"><strong>Hardware összesen</strong></td><td>~298 000 Ft</td></tr>
-          </table>
-        </div>
-        <div>
-          <div style="font-family:'Space Mono',monospace; font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">Szoftver és infrastruktúra</div>
-          <table class="cost-table">
-            <tr><th>Elem</th><th>Leírás</th><th>Költség</th></tr>
-            <tr><td><strong>Fejlesztői környezet</strong></td><td>Python, OpenCV, PyTorch / TensorFlow</td><td>Ingyenes</td></tr>
-            <tr><td><strong>Adattárolás / Cloud</strong></td><td>Google Colab Pro (tanításhoz)</td><td>~4 000 Ft/hó</td></tr>
-            <tr><td><strong>Weboldal hosting</strong></td><td>GitHub Pages</td><td>Ingyenes</td></tr>
-          </table>
-        </div>`
+        id: 'm3', label: '3. Mérföldkő', title: 'Bemutató & Védés',
+        max: 15, color: 'var(--m3)', pill: 'm3-pill',
+        deadline: '2026-05-17', deadlineLabel: '2026. máj. 17. 23:59',
+        description: 'A végleges algoritmus ismertetése és bemutatása.',
+        tasks: [
+          { label: 'PDF: végleges dokumentáció', done: false },
+          { label: 'Élő demó vagy videó', done: false },
+        ],
+        content: [{ icon: '🔜', title: 'Hamarosan', wip: true, html: `<p class="page-sub">Május 17. előtt kerül ide.</p>` }]
       }
-    ]
-  },
-  {
-    id: 'm2', label: '2. Mérföldkő', title: 'Algoritmus Implementálása',
-    max: 10, color: 'var(--m2)', pill: 'm2-pill',
-    deadline: '2026-04-12', deadlineLabel: '2026. ápr. 12. 23:59',
-    description: 'Egy PDF dokumentumba (az 1. mérföldkő folytatásaként) le kell írni a kezdeti algoritmust és az első eredményeket. A honlapon frissíteni kell az eredményeket, a mérföldkövek eredményeit külön kell bemutatni.',
-    tasks: [
-      { label: 'PDF: kezdeti algoritmus leírása + első eredmények', done: false },
-      { label: 'Weboldal frissítése az eredményekkel', done: false },
-      { label: 'Mérföldkövek eredményei elkülönítve bemutatva', done: false },
-    ],
-    content: [
-      {
-        icon: '🔜', title: 'Tartalom hamarosan', wip: true,
-        html: `<p style="color:var(--muted); font-size:.88rem; line-height:1.8;">
-          A 2. mérföldkő tartalma — algoritmus implementáció és első eredmények —
-          2026. április 12. előtt kerül ide.
-        </p>`
+    ];
+
+    const TEAM = ['Hrotkó Máté', 'Litavecz Máté'];
+
+    function render(data) {
+      const container = document.getElementById('milestones-container');
+      container.innerHTML = META.map(m => {
+        const pts = data.milestones[m.id].points;
+        const pct = Math.round(pts / m.max * 100);
+
+        const tasksHtml = m.tasks.map(t => `
+          <div class="task-item">
+            <div class="task-dot" style="background:${t.done ? m.color : 'var(--border)'};"></div>
+            <span class="${t.done ? 'text-active' : 'text-muted'}">${t.label}</span>
+            ${t.done ? `<span class="task-check" style="color:${m.color};">✓ kész</span>` : ''}
+          </div>`).join('');
+
+        const contentHtml = m.content.map(c => `
+          <div class="content-block">
+            <h3>${c.icon} ${c.title} ${c.wip ? '<span class="wip-badge">WIP</span>' : ''}</h3>
+            ${c.html}
+          </div>`).join('');
+
+        const teamHtml = TEAM.map(name => {
+          const note = (data.team[name] && data.team[name][m.id]) || '';
+          return `
+          <div class="member-card">
+            <div class="member-name">👤 ${name}</div>
+            <div class="section-label">Hozzájárulás</div>
+            <p class="member-contribution">${note || 'Nincs bejegyezve.'}</p>
+          </div>`;
+        }).join('');
+
+        return `
+        <div class="milestone-block fade-in">
+          <div class="milestone-block-header">
+            <span class="m-pill ${m.pill}">${m.label}</span>
+            <span class="milestone-title">${m.title}</span>
+            <span class="deadline-badge">📅 ${m.deadlineLabel}</span>
+            <div class="pts-big" style="color:${m.color};">${pts}<span>/${m.max}</span></div>
+          </div>
+          <div class="bar-bg"><div class="bar-fill" style="width:${pct}%; background:${m.color};"></div></div>
+          <p class="page-sub">${m.description}</p>
+          <div class="section-label">// Feladatok</div>
+          <div class="content-block">${tasksHtml}</div>
+          <div class="section-label">// Tartalom</div>
+          ${contentHtml}
+          <div class="section-label">// Csapattagok</div>
+          <div class="grid-4">${teamHtml}</div>
+          <div class="divider"></div>
+        </div>`;
+      }).join('');
+
+      let total = 0;
+      META.forEach(m => { total += data.milestones[m.id].points; });
+      document.getElementById('nav-score').textContent = `${total}/30 pt`;
+    }
+
+    async function init() {
+      try {
+        const data = await loadData();
+        render(data);
+      } catch (e) {
+        document.getElementById('milestones-container').innerHTML = `<div class="card">Hiba a betöltéskor.</div>`;
       }
-    ]
-  },
-  {
-    id: 'm3', label: '3. Mérföldkő', title: 'Bemutató & Védés',
-    max: 15, color: 'var(--m3)', pill: 'm3-pill',
-    deadline: '2026-05-17', deadlineLabel: '2026. máj. 17. 23:59',
-    description: 'Egy PDF dokumentumban ismertetni kell a végleges algoritmust és az eredményeket. A honlapon a többi mérföldkőtől elkülönítve be kell mutatni a végleges algoritmust és az eredményeket.',
-    tasks: [
-      { label: 'PDF: végleges algoritmus + eredmények', done: false },
-      { label: 'Weboldal: végleges eredmények elkülönítve', done: false },
-      { label: 'Élő demó vagy videó bemutató', done: false },
-    ],
-    content: [
-      {
-        icon: '🔜', title: 'Tartalom hamarosan', wip: true,
-        html: `<p style="color:var(--muted); font-size:.88rem; line-height:1.8;">
-          A 3. mérföldkő tartalma — végleges algoritmus és eredmények —
-          2026. május 17. előtt kerül ide.
-        </p>`
-      }
-    ]
-  }
-];
-
-const TEAM = ['Hrotkó Máté', 'Litavecz Máté'];
-
-function render(data) {
-  const container = document.getElementById('milestones-container');
-
-  container.innerHTML = META.map(m => {
-    const pts  = data.milestones[m.id].points;
-    const pct  = Math.round(pts / m.max * 100);
-
-    const tasksHtml = m.tasks.map(t => `
-      <div class="task-item">
-        <div class="task-dot" style="background:${t.done ? m.color : 'var(--border)'};"></div>
-        <span style="font-size:.88rem; color:${t.done ? 'var(--text)' : 'var(--muted)'}; flex:1;">${t.label}</span>
-        ${t.done ? `<span style="font-family:'Space Mono',monospace; font-size:.68rem; color:${m.color};">✓ kész</span>` : ''}
-      </div>`).join('');
-
-    const contentHtml = m.content.map(c => `
-      <div class="content-block">
-        <h3>${c.icon} ${c.title} ${c.wip ? '<span class="wip-badge">Folyamatban</span>' : ''}</h3>
-        ${c.html}
-      </div>`).join('');
-
-    const teamHtml = TEAM.map(name => {
-      const note = (data.team[name] && data.team[name][m.id]) || '';
-      return `
-      <div class="member-card">
-        <div style="font-weight:700; margin-bottom:10px;">👤 ${name}</div>
-        <div style="font-family:'Space Mono',monospace; font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Hozzájárulás</div>
-        ${note
-          ? `<p style="font-size:.85rem; line-height:1.75; color:var(--text); font-family:'Space Mono',monospace;">${note}</p>`
-          : `<p style="font-size:.82rem; color:var(--muted); font-style:italic; font-family:'Space Mono',monospace;">Még nincs bejegyezve.</p>`
-        }
-      </div>`;
-    }).join('');
-
-    return `
-    <div class="milestone-block fade-in">
-      <div class="milestone-block-header">
-        <span class="m-pill ${m.pill}">${m.label}</span>
-        <span style="font-size:1.15rem; font-weight:800;">${m.title}</span>
-        <span class="deadline-badge">📅 ${m.deadlineLabel}</span>
-        <div class="pts-big" style="color:${m.color};">${pts}<span style="font-size:.82rem; color:var(--muted); font-weight:400;">/${m.max}</span></div>
-      </div>
-
-      <div class="bar-bg" style="margin-bottom:18px;">
-        <div class="bar-fill" style="width:${pct}%; background:${m.color};"></div>
-      </div>
-
-      <p style="color:var(--muted); font-size:.88rem; line-height:1.8; margin-bottom:20px;">${m.description}</p>
-
-      <div class="section-label">// Feladatok</div>
-      <div class="content-block" style="padding:14px 18px;">${tasksHtml}</div>
-
-      <div class="section-label">// Tartalom</div>
-      ${contentHtml}
-
-      <div class="section-label">// Csapattagok hozzájárulása</div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">${teamHtml}</div>
-
-      <div class="divider"></div>
-    </div>`;
-  }).join('');
-
-  // nav score
-  let total = 0;
-  META.forEach(m => { total += data.milestones[m.id].points; });
-  document.getElementById('nav-score').textContent = `${total}/30 pt`;
-}
-
-async function init() {
-  setActiveNav();
-  try {
-    const data = await loadData();
-    render(data);
-  } catch(e) {
-    document.getElementById('milestones-container').innerHTML =
-      `<div class="card" style="color:var(--accent3); font-family:'Space Mono',monospace; font-size:.85rem;">
-        Nem sikerült betölteni a data.json-t. Ellenőrizd hogy a fájl létezik a repóban.
-      </div>`;
-  }
-}
-
-init();
-</script>
+    }
+    init();
+  </script>
 </body>
 </html>

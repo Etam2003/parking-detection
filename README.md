@@ -54,18 +54,18 @@ Az összes adat a `data.json` fájlban van. Szerkeszd meg, majd töltsd fel GitH
 ```json
 {
   "milestones": {
-    "m1": { "points": 4 },
+    "m1": { "points": 0 },
     "m2": { "points": 0 },
     "m3": { "points": 0 }
   },
   "team": {
     "Hrotkó Máté": {
-      "m1": "Szakirodalom feldolgozása, weboldal elkészítése, költségbecslés",
+      "m1": "Szakirodalom feldolgozása, PDF dokumentum összeállítása, költségbecslés, weboldal elkészítése",
       "m2": "",
       "m3": ""
     },
     "Litavecz Máté": {
-      "m1": "Algoritmus terv vázlat, PDF dokumentum összeállítása",
+      "m1": "Szakirodalom feldolgozása, PDF dokumentum összeállítása, költségbecslésm, algoritmus terv vázlat",
       "m2": "",
       "m3": ""
     }
