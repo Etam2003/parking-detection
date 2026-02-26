@@ -143,7 +143,7 @@
                 <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">02</div><div class="pipe-line"></div></div><div class="pipe-body"><strong>Előfeldolgozás</strong><br>Normalizálás, zajszűrés, CLAHE kontraszt korrekció.</div></div>
                 <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">03</div><div class="pipe-line"></div></div><div class="pipe-body"><strong>Detektálás / Szegmentálás</strong> <span class="pbadge">Core</span><br>Járművek felismerése YOLO-alapú modellen.</div></div>
                 <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">04</div><div class="pipe-line"></div></div><div class="pipe-body"><strong>Térbeli logika</strong><br>Parkolóhelyenként IoU / maszkfedettség számítása.</div></div>
-                <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">05</div><div class="pipe-line"></div></div><div class="pipe-body"><strong>Időbeli stabilizálás</strong> <span class="pbadge pbadge-teal">Fontos</span><br>Hiszterézis + 5-10 frame-es szavazás a villogás ellen.</div></div>
+                <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">05</div><div class="pipe-line"></div></div><div class="pipe-body"><strong>Időbeli stabilizálás</strong> <span class="pbadge pbadge-teal">Fontos</span><br>Hiszterézis + 5-10 frame-es szavazás a villogás ellen. Opcionálisan <strong>ByteTrack</strong> tracking az ideiglenes takarások és státuszváltások kezeléséhez.</div></div>
                 <div class="pipe-row"><div class="pipe-col-left"><div class="pipe-num">06</div></div><div class="pipe-body"><strong>Kimeneti réteg</strong><br>Státusz, megbízhatósági pontszám, időbélyeg.</div></div>
               </div>
               <div class="section-label">Ajánlott modellek</div>
@@ -151,6 +151,8 @@
                 <div class="model-box primary"><span class="mtag">⭐ Elsődleges</span><div class="mname">YOLO Szegmentálás</div><div class="mdesc">Pixel-pontos maszkok precíz IoU-hoz.</div><ul><li>Gyors inferencia</li><li>Jetson Orin-on fut</li></ul></div>
                 <div class="model-box"><span class="mtag">⚡ Gyorsabb</span><div class="mname">YOLO Detektálás</div><div class="mdesc">Bounding box alapú logika.</div><ul><li>Magasabb FPS</li><li>Kisebb igény</li></ul></div>
                 <div class="model-box"><span class="mtag mtag-teal">🔋 Edge alternatíva</span><div class="mname">SSD-MobileNetV2</div><div class="mdesc">Raspberry Pi szintű hardverekhez.</div></div>
+                <div class="model-box"><span class="mtag" style="color:var(--accent3);">📊 Klasszikus baseline</span><div class="mname">Háttér-kivonás</div><div class="mdesc">OpenCV MOG2 / KNN fix kamera és stabil háttér mellett.</div><ul><li>Gyors, egyszerű</li><li>Fény- és árnyékérzékeny</li></ul></div>
+                <div class="model-box"><span class="mtag" style="color:var(--accent3);">🔲 ROI baseline</span><div class="mname">ROI-osztályozó</div><div class="mdesc">Parkolóhelyenkénti kivágás + bináris klasszifikáció. Érdemes fenntartani összehasonlításként.</div><ul><li>Egyszerű, auditálható</li><li>Skálázáskor karbantartást igényel</li></ul></div>
               </div>`
           },
           {
@@ -207,8 +209,21 @@
                 <tr><td><strong>A</strong> — Kutatási prototípus</td><td>64 661 - 93 650 Ft</td></tr>
                 <tr><td><strong>B</strong> — 1 kamerás edge pilot</td><td>250 707 - 349 480 Ft</td></tr>
                 <tr><td><strong>C</strong> — 4 kamerás edge pilot</td><td>419 690 - 600 430 Ft</td></tr>
+                <tr><td><strong>D</strong> — 4 kamerás edge + felhős tanítás</td><td>451 828 - 632 568 Ft + felhő tárolás</td></tr>
+                <tr><td><strong>E</strong> — Vállalati annotáció (CVAT Enterprise)</td><td>4 253 210 - 4 433 950 Ft / év</td></tr>
               </table>
-              <div class="license-note"><strong>Licenc:</strong> Az OpenCV és PyTorch nyílt forrású. Az Ultralytics kereskedelmi célra licencköteles lehet.</div>`
+              <div class="section-label">Opcionális szoftver és felhő költségek</div>
+              <table class="cost-table">
+                <tr><th>Tétel</th><th>Becsült díj</th></tr>
+                <tr><td>CVAT Online Solo</td><td>~10 542 Ft / hó</td></tr>
+                <tr><td>CVAT Online Team (2 seat, havi)</td><td>~21 084 Ft / hó</td></tr>
+                <tr><td>CVAT Online Team (éves számlázás)</td><td>~14 695 Ft / hó</td></tr>
+                <tr><td>CVAT Enterprise Basic</td><td>~3 833 520 Ft / év</td></tr>
+                <tr><td>AWS EC2 g5.xlarge (20 óra)</td><td>~6 428 Ft (csak compute)</td></tr>
+                <tr><td>AWS EC2 g5.xlarge (100 óra)</td><td>~32 138 Ft (csak compute)</td></tr>
+                <tr><td>Ultralytics kereskedelmi licenc</td><td>egyedi ajánlat</td></tr>
+              </table>
+              <div class="license-note"><strong>Licenc:</strong> Az OpenCV (Apache 2.0), Python (PSF) és PyTorch (BSD) nyílt forrású, kereskedelmi projektekben általában jól használható. Az <strong>Ultralytics</strong> kereskedelmi célra licencköteles — használati mód és terjesztési szándék szerint egyeztetendő. A teljes rendszer licencelését a konkrét keretrendszer és deployment mód is befolyásolja.</div>`
           }
         ]
       },
@@ -303,4 +318,5 @@
     init();
   </script>
 </body>
+
 </html>
