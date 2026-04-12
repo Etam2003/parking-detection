@@ -13,12 +13,12 @@
     "team": {
         "Hrotkó Máté": {
             "m1": "Weboldal elkészítése, költségbecslés, PDF dokumentum",
-            "m2": "",
+            "m2": "Google Colab notebook elkészítése és futtatása, modell tanítása és kiértékelése, weboldal frissítése az eredményekkel",
             "m3": ""
         },
         "Litavecz Máté": {
             "m1": "Algoritmus terv vázlat, költségbecslés, PDF dokumentum",
-            "m2": "",
+            "m2": "Dataset előkészítés, augmentációs pipeline és algoritmusok implementálása, pdf dokumentum megírása",
             "m3": ""
         }
     }
