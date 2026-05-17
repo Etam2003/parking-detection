@@ -1,10 +1,10 @@
 {
     "milestones": {
         "m1": {
-            "points": 0
+            "points": 5
         },
         "m2": {
-            "points": 0
+            "points": 10
         },
         "m3": {
             "points": 0
@@ -14,12 +14,12 @@
         "Hrotkó Máté": {
             "m1": "Weboldal elkészítése, költségbecslés, PDF dokumentum",
             "m2": "Google Colab notebook elkészítése és futtatása, modell tanítása és kiértékelése, weboldal frissítése az eredményekkel",
-            "m3": ""
+            "m3": "Weboldal elkészítése, eredmények összefoglalása, függvények futtatása, automatikus slot genrálók írása"
         },
         "Litavecz Máté": {
             "m1": "Algoritmus terv vázlat, költségbecslés, PDF dokumentum",
             "m2": "Dataset előkészítés, augmentációs pipeline és algoritmusok implementálása, pdf dokumentum megírása",
-            "m3": ""
+            "m3": "Modell finomhangolása, pdf dokumentum elkészítsése, automatikus slot genrálók írása "
         }
     }
 }

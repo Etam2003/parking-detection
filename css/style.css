@@ -654,6 +654,31 @@ input[type=text]:focus {
   padding: 2px 0;
   line-height: 1.5;
 }
+
+/* === M3 KÉPGALÉRIA STÍLUSOK === */
+.m3-img-wrap {
+  margin: 14px 0 22px;
+  text-align: center;
+}
+.m3-img {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border, rgba(255,255,255,0.08));
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  margin: 0 auto;
+}
+.m3-img-cap {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-muted, #9aa0a6);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.5;
+}
+ 
 .deploy-grid .deploy-box .ditem.ditem-pro::before {
   content: "✓";
   color: var(--accent2);
